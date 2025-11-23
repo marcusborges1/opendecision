@@ -1,0 +1,47 @@
+version: "2"
+
+run:
+  timeout: 2m
+  go: '1.25'
+
+formatters:
+  enable:
+    - gci
+    - gofumpt
+    - goimports
+  settings:
+    gci:
+      sections:
+        - standard
+        - default
+        - prefix(github.com/marcusborges1/opendecision)
+    gofumpt:
+      extra-rules: true
+    goimports:
+      local-prefixes:
+        - github.com/marcusborges1/opendecision
+
+linters:
+  enable:
+    - errcheck      # Check for unchecked errors
+    - govet         # Reports suspicious constructs
+    - ineffassign   # Detect ineffectual assignments
+    - staticcheck   # Go static analysis
+    - unused        # Check for unused constants, variables, functions
+    - misspell      # Find commonly misspelled words
+    - revive        # Fast, configurable, extensible linter
+    - bodyclose     # Check HTTP response body is closed
+    - errorlint     # Find code that will cause problems with Go 1.13+ error wrapping
+  settings:
+    revive:
+      rules:
+        - name: exported
+          severity: warning
+          disabled: false
+        - name: var-naming
+          severity: warning
+          disabled: false
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
